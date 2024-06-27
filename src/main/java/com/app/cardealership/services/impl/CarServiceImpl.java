@@ -1,6 +1,7 @@
 package com.app.cardealership.services.impl;
 
 import com.app.cardealership.dto.CarDto;
+import com.app.cardealership.dto.SaveCarDto;
 import com.app.cardealership.mapper.Mapper;
 import com.app.cardealership.persistance.entities.Car;
 import com.app.cardealership.persistance.repository.CarRepository;
@@ -26,16 +27,16 @@ public class CarServiceImpl implements ICarService {
     }
 
     @Override
-    public CarDto saveDto(CarDto carDto) {
+    public CarDto saveDto(SaveCarDto saveCarDto) {
         Car car = new Car();
-        car.setCar_condition(carDto.getCar_condition());
-        car.setBrand(carDto.getBrand());
-        car.setKm(carDto.getKm());
-        car.setDate(carDto.getDate());
-        car.setColor(carDto.getColor());
-        car.setImg(carDto.getImg());
-        car.setDescription(carDto.getDescription());
-        car.setPrice(carDto.getPrice());
+        car.setCar_condition(saveCarDto.getCar_condition());
+        car.setBrand(saveCarDto.getBrand());
+        car.setKm(saveCarDto.getKm());
+        car.setDate(saveCarDto.getDate());
+        car.setColor(saveCarDto.getColor());
+        car.setImg(saveCarDto.getImg());
+        car.setDescription(saveCarDto.getDescription());
+        car.setPrice(saveCarDto.getPrice());
         carRepository.save(car);
         return mapper.mapToCarDto(car);
     }

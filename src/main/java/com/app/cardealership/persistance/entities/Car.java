@@ -7,6 +7,7 @@ import jakarta.persistence.Id;
 import lombok.*;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Data
 @Entity
@@ -23,6 +24,7 @@ public class Car {
     private String brand;
     private Double km;
     private String color;
+    private LocalDateTime savedAt = LocalDateTime.now();
     private String img;
     private LocalDate date;
     private String description;

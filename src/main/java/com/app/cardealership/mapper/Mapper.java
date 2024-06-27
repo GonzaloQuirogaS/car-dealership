@@ -16,6 +16,7 @@ public class Mapper {
         carDto.setKm(car.getKm());
         carDto.setColor(car.getColor());
         carDto.setImg(car.getImg());
+        carDto.setSavedAt(car.getSavedAt());
         carDto.setCar_condition(car.getCar_condition());
         carDto.setPrice(car.getPrice());
         carDto.setDate(car.getDate());

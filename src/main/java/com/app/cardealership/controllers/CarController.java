@@ -1,6 +1,7 @@
 package com.app.cardealership.controllers;
 
 import com.app.cardealership.dto.CarDto;
+import com.app.cardealership.dto.SaveCarDto;
 import com.app.cardealership.persistance.entities.Car;
 import com.app.cardealership.services.ICarService;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -28,11 +29,11 @@ public class CarController {
 
     @PostMapping("/save")
     @Tag(name = "SAVE", description = "SAVE methods")
-    private ResponseEntity<?> save(CarDto carDto) {
+    private ResponseEntity<?> save(SaveCarDto saveCarDto) {
         try {
             return ResponseEntity
                     .status(HttpStatus.OK)
-                    .body(carService.saveDto(carDto));
+                    .body(carService.saveDto(saveCarDto));
         } catch (Exception e) {
             return ResponseEntity
                     .status(HttpStatus.BAD_REQUEST)
@@ -72,17 +73,17 @@ public class CarController {
 
     @PutMapping("/update/{id}")
     @Tag(name = "UPDATE", description = "UPDATE methods")
-    private ResponseEntity<?> update(@PathVariable Long id, @RequestBody CarDto carDto) {
+    private ResponseEntity<?> update(@PathVariable Long id, @RequestBody SaveCarDto saveCarDto) {
         try {
             Car car = carService.findById(id);
-            car.setDescription(carDto.getDescription());
-            car.setDate(carDto.getDate());
-            car.setKm(carDto.getKm());
-            car.setImg(carDto.getImg());
-            car.setPrice(carDto.getPrice());
-            car.setColor(carDto.getColor());
-            car.setBrand(carDto.getBrand());
-            car.setCar_condition(carDto.getCar_condition());
+            car.setDescription(saveCarDto.getDescription());
+            car.setDate(saveCarDto.getDate());
+            car.setKm(saveCarDto.getKm());
+            car.setImg(saveCarDto.getImg());
+            car.setPrice(saveCarDto.getPrice());
+            car.setColor(saveCarDto.getColor());
+            car.setBrand(saveCarDto.getBrand());
+            car.setCar_condition(saveCarDto.getCar_condition());
 
             carService.save(car);
             return ResponseEntity
