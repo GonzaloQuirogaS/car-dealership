@@ -16,8 +16,6 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 public class CarDto implements Serializable {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String brand;
     private Double km;
