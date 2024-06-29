@@ -78,7 +78,7 @@ public class CarController {
     @Operation(summary = "Find car by ID")
     private ResponseEntity<?> findById(@PathVariable Long id) {
         try {
-            Car car = carService.findById(id);
+            CarDto car = carService.findByIdDto(id);
             return ResponseEntity
                     .status(HttpStatus.OK)
                     .body(car);

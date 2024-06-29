@@ -58,6 +58,7 @@ public class OrderController {
             OrderDetail orderDetail = new OrderDetail();
             double sumaTotal;
             Car car = carService.findById(id);
+
             orderDetail.setCar(car);
             orderDetail.setPrice(Double.valueOf(car.getPrice()));
             orderDetail.setTotal_price(Double.valueOf(car.getPrice()));
