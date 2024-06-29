@@ -14,7 +14,7 @@ public class OrderDto implements Serializable {
 
     private Long id;
     private String order_number;
-    private LocalDateTime created_at = LocalDateTime.now();
+    private LocalDateTime created_at;
     private Double order_total;
 
 }

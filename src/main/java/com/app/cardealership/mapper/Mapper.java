@@ -50,7 +50,6 @@ public class Mapper {
         orderDetailDto.setUser_name(orderDetail.getUser_name());
         orderDetailDto.setUser_surname(orderDetail.getUser_surname());
         orderDetailDto.setTotal_price(orderDetail.getTotal_price());
-
         return orderDetailDto;
     }
 }
