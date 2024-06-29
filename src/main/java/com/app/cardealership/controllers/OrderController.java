@@ -70,7 +70,7 @@ public class OrderController {
             return ResponseEntity
                     .status(HttpStatus.OK)
                     .body(orderDetail.getCar());
-        }catch (Exception e){
+        } catch (Exception e) {
             return ResponseEntity
                     .status(HttpStatus.BAD_REQUEST)
                     .body("Error, el ID no pertenece a ningun auto");
@@ -127,6 +127,22 @@ public class OrderController {
             return ResponseEntity
                     .status(HttpStatus.BAD_REQUEST)
                     .body("Error al crear la orden, verifique sus datos");
+        }
+    }
+
+    @GetMapping("/{id}")
+    @Tag(name = "GET")
+    @Operation(summary = "Find order by ID")
+    private ResponseEntity<?> findById(@PathVariable Long id) {
+        try {
+            OrderDto orderDto = orderService.findByIdDto(id);
+            return ResponseEntity
+                    .status(HttpStatus.OK)
+                    .body(orderDto);
+        } catch (Exception e) {
+            return ResponseEntity
+                    .status(HttpStatus.BAD_REQUEST)
+                    .body("No existe orden con ese ID, verifique sus datos");
         }
     }
 

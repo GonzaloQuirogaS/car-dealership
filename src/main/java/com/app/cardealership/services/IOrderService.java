@@ -10,5 +10,8 @@ public interface IOrderService {
     List<OrderDto> findAll();
 
     Order save(Order order);
+    Order findById(Long id);
+
+    OrderDto findByIdDto(Long id);
 
 }

@@ -28,4 +28,15 @@ public class OrderServiceImpl implements IOrderService {
     public Order save(Order order) {
         return orderRepository.save(order);
     }
+
+    @Override
+    public Order findById(Long id) {
+        return orderRepository.findById(id).orElseThrow();
+    }
+
+    @Override
+    public OrderDto findByIdDto(Long id) {
+        Order order = orderRepository.findById(id).orElseThrow();
+        return mapper.mapToOrderDto(order);
+    }
 }

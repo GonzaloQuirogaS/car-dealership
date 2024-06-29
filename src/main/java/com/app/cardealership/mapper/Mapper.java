@@ -35,6 +35,7 @@ public class Mapper {
         orderDto.setOrder_number(order.getOrder_number());
         orderDto.setOrder_total(order.getOrder_total());
         orderDto.setCreated_at(order.getCreated_at());
+        orderDto.setDetails(order.getDetails());
         return orderDto;
     }
 
