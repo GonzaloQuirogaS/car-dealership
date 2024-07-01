@@ -30,16 +30,20 @@ public class OrderController {
 
     private final IOrderDetailService orderDetailService;
 
+    //Inicializamos una lista de detalles vacia de forma global para realizar operaciones sobre ella
     List<OrderDetail> details = new ArrayList<>();
 
+    //Creamos una orden vacia de forma global para para realizar operaciones sobre ella
     Order order = new Order();
 
+    //Metodo validation() que se encarga de validar los datos ingresados en el metodo save()
     private ResponseEntity<?> validation(BindingResult result) {
         Map<String, String> errors = new HashMap<>();
         result.getFieldErrors().forEach(err -> errors.put(err.getField(), "El campo " + err.getField() + " " + err.getDefaultMessage()));
         return ResponseEntity.badRequest().body(errors);
     }
 
+    //Metodo para ver todas las ordenes registradas en la base de dato
     @GetMapping
     @Tag(name = "GET")
     @Operation(summary = "Get all orders")
@@ -50,6 +54,7 @@ public class OrderController {
     }
 
     //Cart
+    //Metodo que agrega un auto al carrito recibiendo como parametro el id de un auto
     @PostMapping("/cart/{id}")
     @Tag(name = "POST")
     @Operation(summary = "Add car to cart by ID")
@@ -77,6 +82,7 @@ public class OrderController {
         }
     }
 
+    //Metodo que elimina un auto al carrito recibiendo como parametro el id de un auto
     @DeleteMapping("/delete-cart/{id}")
     @Tag(name = "DELETE")
     @Operation(summary = "Delete car from cart by ID")
@@ -105,6 +111,7 @@ public class OrderController {
         }
     }
 
+    //Metodo que nos muestra todos los items guardados en el carrito
     @GetMapping("/cart")
     @Tag(name = "GET")
     @Operation(summary = "Get cart")
@@ -125,7 +132,7 @@ public class OrderController {
                 .body("No hay elementos en el cart");
     }
 
-
+    //Metodo para guardar una orden recibiendo como body los datos del usuario efectuando la compra
     @PostMapping("/save")
     @Tag(name = "POST")
     @Operation(summary = "Create an order")
@@ -158,6 +165,7 @@ public class OrderController {
         }
     }
 
+    //Metodo para obtener una orden mediante su ID
     @GetMapping("/{id}")
     @Tag(name = "GET")
     @Operation(summary = "Find order by ID")
