@@ -50,15 +50,14 @@ public class OrderController {
     }
 
     //Cart
-    @PostMapping("/cart")
+    @PostMapping("/cart/{id}")
     @Tag(name = "POST")
     @Operation(summary = "Add car to cart by ID")
-    private ResponseEntity<?> addCart(@RequestParam Long id) {
+    private ResponseEntity<?> addCart(@PathVariable Long id) {
         try {
             OrderDetail orderDetail = new OrderDetail();
             double sumaTotal;
             Car car = carService.findById(id);
-
             orderDetail.setCar(car);
             orderDetail.setPrice(Double.valueOf(car.getPrice()));
             orderDetail.setTotal_price(Double.valueOf(car.getPrice()));
@@ -70,11 +69,39 @@ public class OrderController {
             order.setOrder_total(sumaTotal);
             return ResponseEntity
                     .status(HttpStatus.OK)
-                    .body(orderDetail.getCar());
+                    .body(details.stream().map(OrderDetail::getCar));
         } catch (Exception e) {
             return ResponseEntity
                     .status(HttpStatus.BAD_REQUEST)
                     .body("Error, el ID no pertenece a ningun auto");
+        }
+    }
+
+    @DeleteMapping("/delete-cart/{id}")
+    @Tag(name = "DELETE")
+    @Operation(summary = "Delete car from cart by ID")
+    private ResponseEntity<?> deleteCart(@PathVariable Long id) {
+        try {
+            List<OrderDetail> newOrders = new ArrayList<>();
+            for (OrderDetail orderDetail : details) {
+
+                if (!orderDetail.getCar().getId().equals(id)) {
+                    newOrders.add(orderDetail);
+                }
+            }
+            details = newOrders;
+            double sumaTotal;
+            sumaTotal = details.stream().mapToDouble(OrderDetail::getTotal_price).sum();
+
+            order.setOrder_total(sumaTotal);
+
+            return ResponseEntity
+                    .status(HttpStatus.OK)
+                    .body(details.stream().map(OrderDetail::getCar));
+        } catch (Exception e) {
+            return ResponseEntity
+                    .status(HttpStatus.BAD_REQUEST)
+                    .body("Error, el id ingresado no corresponde a ningun auto");
         }
     }
 
