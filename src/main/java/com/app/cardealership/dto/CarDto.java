@@ -1,8 +1,5 @@
 package com.app.cardealership.dto;
 
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -11,6 +8,7 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
+//DTO de la clase Car que devuelve todos los atributos de la clase Car
 @Data
 @AllArgsConstructor
 @NoArgsConstructor

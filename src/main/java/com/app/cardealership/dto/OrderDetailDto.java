@@ -3,13 +3,13 @@ package com.app.cardealership.dto;
 import com.app.cardealership.persistance.entities.Car;
 import com.app.cardealership.persistance.entities.Order;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import jakarta.persistence.ManyToOne;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 
+//DTO de la clase OrderDetail que devuelve todos los atributos de la clase OrderDetail
 @Data
 @AllArgsConstructor
 @NoArgsConstructor

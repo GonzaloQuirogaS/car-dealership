@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 
+//DTO de la clase OrderDetail que devuelve unicamente los valores necesarios para guardar un OrderDetail nuevo
 @Data
 @AllArgsConstructor
 @NoArgsConstructor

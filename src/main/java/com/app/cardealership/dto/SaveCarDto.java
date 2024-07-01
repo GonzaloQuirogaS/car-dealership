@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 import java.io.Serializable;
 import java.time.LocalDate;
 
+//DTO de la clase Car que devuelve unicamente los valores necesarios para guardar un Car nuevo
 @Data
 @AllArgsConstructor
 @NoArgsConstructor

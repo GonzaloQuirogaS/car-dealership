@@ -9,6 +9,7 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.List;
 
+//DTO de la clase OrderDetail que devuelve todos los atributos de la clase OrderDetail
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
