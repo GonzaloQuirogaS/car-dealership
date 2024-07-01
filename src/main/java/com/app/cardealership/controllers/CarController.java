@@ -14,7 +14,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -24,21 +23,31 @@ public class CarController {
 
     private final ICarService carService;
 
+
+    //Metodo validation() que se encarga de validar los datos ingresados en el metodo save()
     private ResponseEntity<?> validation(BindingResult result) {
         Map<String, String> errors = new HashMap<>();
         result.getFieldErrors().forEach(err -> errors.put(err.getField(), "El campo " + err.getField() + " " + err.getDefaultMessage()));
         return ResponseEntity.badRequest().body(errors);
     }
 
+    //Metodo para ver todos los autos registrados en la base de datos
     @GetMapping
     @Tag(name = "GET", description = "GET methods")
     @Operation(summary = "Get all cars")
-    private ResponseEntity<List<CarDto>> findAll() {
-        return ResponseEntity
-                .status(HttpStatus.OK)
-                .body(carService.findAll());
+    private ResponseEntity<?> findAll() {
+        try {
+            return ResponseEntity
+                    .status(HttpStatus.OK)
+                    .body(carService.findAll());
+        } catch (Exception e) {
+            return ResponseEntity
+                    .status(HttpStatus.BAD_REQUEST)
+                    .body("No se encontraron autos registrados");
+        }
     }
 
+    //Metodo para guardar un auto con sus respectivos datos y validaciones
     @PostMapping("/save")
     @Tag(name = "POST", description = "POST methods")
     @Operation(summary = "Create a car")
@@ -57,6 +66,7 @@ public class CarController {
         }
     }
 
+    //Metodo para elmininar un auto mediante su ID
     @DeleteMapping("/delete/{id}")
     @Tag(name = "DELETE", description = "DELETE methods")
     @Operation(summary = "Delete a car")
@@ -73,6 +83,7 @@ public class CarController {
                 .body("Eliminado con exito!");
     }
 
+    //Metodo para buscar un auto por su ID
     @GetMapping("/{id}")
     @Tag(name = "GET", description = "GET methods")
     @Operation(summary = "Find car by ID")
@@ -89,6 +100,8 @@ public class CarController {
         }
     }
 
+    //Metodo para actualizar un auto con sus respectivas validaciones y
+    //recibiendo como parametro su ID y como body los datos a cambiar
     @PutMapping("/update/{id}")
     @Tag(name = "UPDATE", description = "UPDATE methods")
     @Operation(summary = "Update car by ID")
